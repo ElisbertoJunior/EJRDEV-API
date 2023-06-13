@@ -37,9 +37,5 @@ exports.login = async (req, res) => {
 
   res.send({
     token: token,
-    user: {
-      username,
-      passwordAndUserMatch
-    }
   });
 };
