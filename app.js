@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 
+
 app.use("/api/projects", projectsRouter)
 app.use("/api/destaques", FeaturedProjects)
 app.use('/user', userRouter)

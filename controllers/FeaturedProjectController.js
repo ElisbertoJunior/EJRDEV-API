@@ -11,9 +11,8 @@ exports.getProjects = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { title, description, linkRepos, linkProject } = req.body;
-    const file = req.file;
-
+    const { title, description, linkRepos, linkProject, file } = req.body;
+    
     const project = new Project({
       title: title,
       description: description,
@@ -23,7 +22,7 @@ exports.create = async (req, res) => {
     });
 
     await project.save();
-    res.json({ project, msg: "Imagem salva com sucesso!" });
+    res.json({  msg: "Projeto salvo com sucesso!" });
   } catch (err) {
     res.status(500).json({ message: "Erro ao salvar imagem" });
   }
