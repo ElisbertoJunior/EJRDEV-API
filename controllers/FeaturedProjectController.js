@@ -11,14 +11,30 @@ exports.getProjects = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { title, description, linkRepos, linkProject, file } = req.body;
+    const { title, description, linkRepos, linkProject } = req.body;
+    const file = req.file;
     
+    if (!file) {
+      return res.status(400).json({ message: 'Nenhum arquivo foi enviado.' });
+    }
+
+    const formData = {
+      title,
+      description,
+      linkRepos,
+      linkProject,
+      file: {
+        name: file.originalname,
+        path: file.path,
+      },
+    };
+
     const project = new Project({
-      title: title,
-      description: description,
-      linkRepos: linkRepos,
-      linkProject: linkProject,
-      src: file.path,
+      title: formData.title,
+      description: formData.description,
+      linkRepos: formData.linkRepos,
+      linkProject: formData.linkProject,
+      src: formData.file.path,
     });
 
     await project.save();
